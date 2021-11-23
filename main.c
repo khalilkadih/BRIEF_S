@@ -18,26 +18,30 @@ struct CompteBq {
        float montantDeposer;
        int nbrDesCompteCree=0;
        char checkCin [20];
+       float montantTirer;
+       int choixOperation;
 
 
 
 //les fonction utilisee
-void Menu();
-void remplissage(int NombreDuCompte );
-void AffichageCompte(int NombreDuCompte );
-void Depot(float montants);
-void tirer(float montants);
-int confirmer();
+    void Menu();
+    void remplissage(int NombreDuCompte );
+    void AffichageCompte(int NombreDuCompte );
+    void Depot(float montants);
+    void tirer(float montantTirer);
+    int confirmer();
+    void operation();
 
 
 
 
-int main(){
- Menu();
+
+        int main(){
+         Menu();
 
 
-    return 0;
-}
+            return 0;
+        }
 void Menu(){
 
         system("cls");
@@ -79,19 +83,20 @@ void Menu(){
         printf("\nle compte a cree avec Succes !!!\n\n taper sur un touche pour retour a la Menu !!");
         getch();
         Menu();
-            break;
-            case 3:
+        break;
+
+
+
+        case 3:
         printf("\n\t\t3.Operation\n");
-        printf("\nEntrer le montant que vous deposer sur votre compte\n\n");
-        scanf("%f",&montantDeposer);
-        printf("votre compte a ete cree avec success ");
-
-        Depot(montantDeposer);
-
+        operation();
+        printf("\n\n!!!taper sur un touche pour retour a la Menu !!\n\n");
+        getch();
+        Menu();
 
             break;
               case 4:
-        printf("\n\t\t1.affichage\n");
+                    printf("\n\t\t1.affichage\n");
             break;
         case 5:
         printf("\n\t\t2. fedilisation \n");
@@ -113,6 +118,7 @@ void Menu(){
 void remplissage(int NombreDuCompte){
         printf("entrer le nombre des compte souhaitez-vous Creer!!! ");
         scanf("%d",&NombreDuCompte);
+        if(nbrDesCompteCree==0){
                 for(int i=0;i<NombreDuCompte;i++){
                     int j=nbrDesCompteCree+i;
                     printf("\nEntrer les info pour la Compte Numero %d:\n",i+1);
@@ -125,7 +131,27 @@ void remplissage(int NombreDuCompte){
                     printf("entrer votre Montant:\n");
                     scanf("%f",&compte[j].Montant);
                     nbrDesCompteCree++;
+
+                    }
+                    }
+        else {
+            for(int i=nbrDesCompteCree;i>NombreDuCompte+nbrDesCompteCree;i--)/* */
+                {
+                    int j=nbrDesCompteCree+i;
+                    printf("\nEntrer les info pour la Compte Numero %d:\n",i+1);
+                    printf("entrer votre Cin:\n");
+                    scanf("%s",compte[j].Cin);
+                    printf("enrer votre Nom:\n");
+                    scanf("%s",compte[j].Nom);
+                    printf("entrer votre Prenom:\n");
+                    scanf("%s",compte[j].Prenom);
+                    printf("entrer votre Montant:\n");
+                    scanf("%f",&compte[j].Montant);
+                    nbrDesCompteCree++;
         }
+
+        }
+
 }
 /**************************************************************************************************************************/
 void AffichageCompte(int NombreDuCompte ){
@@ -172,23 +198,45 @@ void Depot(float montants){
 
 }
 /**************************************************************************************************************************/
-void tirer(float montants){
+void tirer(float montantTirer){
 
     printf("\nEntrer Votre Cni:\n");
     scanf("%s",checkCin);
     printf("res est :%s \t \n\n Et nbre du compte :  %d",checkCin,nbrDesCompteCree);
-    for(i=0;i<nbrDesCompteCree;i++)
+
+    for(int i=0;i<nbrDesCompteCree;i++)
         {
-            if(strcmp(checkCin,compte[i].Cin)==0)&& )
+
+            if(strcmp(checkCin,compte[i].Cin)==0)
             {
+                if(montantTirer<compte[i].Montant)
+                    {
+                         printf("\nEntrer le montant que vous tirez!!!!!");
+                            scanf("%f",&montantTirer);
+                                    printf("\n votre solde initiale est :%f",compte->Montant);
 
+                                    compte->Montant-=montantTirer;
 
+                                    printf("\n votre solde initiale est :%f",compte->Montant);
+
+                                    printf("\n\n Everything is ok !!!!\n\n");
+                                    printf("Taper sur clavier pour retour a la Menu " );
+                                    getch();
+                                    Menu();
+                    }
+
+                return;
             }
 
 
 
 
         }
+        printf("vous n\'avez pas le compte \n ou votre solde n\'est pas insufisant pour effectuer l'operation" );
+        printf("Taper sur clavier pour retour a la Menu " );
+        getch();
+        Menu();
+
 
 }
 
@@ -205,3 +253,25 @@ void tirer(float montants){
     return (r=='1')? 1:0;
     }
 /**************************************************************************************************************************/
+ void operation(){
+        printf("\n1. Diposer\n*****************\t ");
+        printf("\n2.Tirer\n *******************\t ");
+        printf("\n.ChoisIR votre operation:\n");
+        scanf("%d",choixOperation);
+
+        switch(choixOperation)
+        {
+        case 1:
+        Depot(montantDeposer);
+        printf("votre depot  a ete fait  avec success !!!!");
+        break;
+        case 2:
+        tirer( montantTirer);
+        printf("votre Retire  a ete fait  avec success !!!!");
+
+            break;
+            default:
+            Menu();
+        }
+
+ }
