@@ -20,6 +20,8 @@ struct CompteBq {
        char checkCin [20];
        float montantTirer;
        int choixOperation;
+       int i,j,temp;
+       int NombreDuCompte;
 
 
 
@@ -31,6 +33,7 @@ struct CompteBq {
     void tirer(float montantTirer);
     int confirmer();
     void operation();
+    void affichageAsc();
 
 
 
@@ -97,6 +100,7 @@ void Menu(){
             break;
               case 4:
                     printf("\n\t\t1.affichage\n");
+                    affichageAsc();
             break;
         case 5:
         printf("\n\t\t2. fedilisation \n");
@@ -154,13 +158,13 @@ void remplissage(int NombreDuCompte){
 
 }
 /**************************************************************************************************************************/
-void AffichageCompte(int NombreDuCompte ){
+    void AffichageCompte(int NombreDuCompte ){
 
-for(int i=0;i<NombreDuCompte;i++){
-    printf("\n\t ****    les inforamation de a compte numero  %d\n************************ ",i+1);
-            printf("`\nvotre Cin est :\t %s\n votre Nom est :\t %s\n votre Prenom est: \t %s\n votre Montant est: \t %f\n",compte[i].Cin,compte[i].Nom,compte[i].Prenom,compte[i].Montant);
-        }
-}
+    for(int i=0;i<NombreDuCompte;i++){
+        printf("\n\t ****    les inforamation de a compte numero  %d\n************************ ",i+1);
+                printf("`\nvotre Cin est :\t %s\n votre Nom est :\t %s\n votre Prenom est: \t %s\n votre Montant est: \t %f\n",compte[i].Cin,compte[i].Nom,compte[i].Prenom,compte[i].Montant);
+            }
+    }
 /**************************************************************************************************************************/
 void Depot(float montants){
     printf("\nEntrer Votre Cni:\n");
@@ -273,5 +277,27 @@ void tirer(float montantTirer){
             default:
             Menu();
         }
+
+ }
+/*************************************************************************************************/
+ void affichageAsc(){
+
+
+int i,j;
+ for(i=0;i<nbrDesCompteCree-1;i++){
+       for(j=i;j<nbrDesCompteCree;j++){
+            if(compte.[i]>compte[j])
+           {
+               temp=compte[i];
+               compte[i]=compte[j];
+                compte[j]=temp;
+            }
+        }
+    }
+printf("Array after Sort");
+
+AffichageCompte(nbrDesCompteCree);
+
+
 
  }
