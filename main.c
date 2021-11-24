@@ -74,7 +74,7 @@ void Menu(){
             break;
         case 2:
             printf("\n\t\t2.introduire plusieur compte bancaire\n");
-            printf("Entrer le nombre des comptes souhaitez-vous Creer!!! ");
+            printf("Entrer le nombre des comptes souhaitez-vous Creer: ");
             scanf("%d",&NombreDuCompte);
             remplissage(NombreDuCompte);
             AffichageCompte();
@@ -145,18 +145,18 @@ void Depot(){
                     if(strcmp(checkCin,compte[i].Cin)==0)
                         {
                             printf("\n votre solde initiale est :%f",compte->Montant);
-                            printf("\nEntrer le montant que vous Diposer!:\n");
+                            printf("\nEntrer le montant que vous Diposer:\n");
                             scanf("%f",&montantDeposer);
                             compte->Montant+=montantDeposer;
                             printf("\n\nvotre nouveau  Solde est %f",compte->Montant);
-                            printf("\n\tMerci !!! Votre Operation fait Avec Success \n");
+                            printf("\n\tMerci ! Votre Operation fait Avec Success \n");
                             RetourToMenu();
             return;
                         }
                         getch();
                         RetourToMenu();
                     }
-                            printf("\n le compte n\'exist pas \n\n !!!!  \t\t pour Retour a la Menu Principale toucher la Clavier\t\t !!!");
+                            printf("\n le compte n\'exist pas \n\n !! \t\t pour Retour a la Menu Principale toucher la Clavier\t\t !!!");
                             getch();
                             RetourToMenu();
             }
